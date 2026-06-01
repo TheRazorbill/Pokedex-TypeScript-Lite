@@ -1,18 +1,18 @@
-//  # Camada de Integração Externa (fetch nativo). Retorna Promises tipadas com Interfaces.
-import type { PokemonApiResponse, PokemonResumo } from "../models/pokemon.ts";
+import type { PokemonApiResponse, PokemonResumo } from '../models/pokemon.js';
+import { TerminalController } from '../controllers/terminalController.js';
 
-export async function buscarPokemon(
-  nomeOuId: string,
-): Promise<PokemonResumo | null> {
-  const parametrolimpo = nomeOuId.toLocaleLowerCase().trim();
-  const url = `https://pokeapi.co/api/v2/pokemon/${parametrolimpo}`;
+export async function buscarPokemon(nomeOuId: string): Promise<PokemonResumo | null> {
+  const parametroLimpo = nomeOuId.toLowerCase().trim();
+  const url = `https://pokeapi.co/api/v2/pokemon/${parametroLimpo}`;
 
   try {
-    const resposta = await fetch(url);
+    const resposta = await fetch(url); 
+
     if (!resposta.ok) {
-      console.log("[ERRO] Pokémon não encontrado.");
+      TerminalController.exibirErro(`Pokémon não encontrado.`);
       return null;
     }
+
     const dados: PokemonApiResponse = await resposta.json();
 
     const listaTipos = dados.types.map((item) => item.type.name);
@@ -22,10 +22,11 @@ export async function buscarPokemon(
       name: dados.name,
       tipos: listaTipos,
       altura: dados.height,
-      peso: dados.weight,
+      peso: dados.weight
     };
+
   } catch (erro) {
-    console.log("[ERRO] Não foi possível buscar o Pokémon.");
+    TerminalController.exibirErro("Não foi possível buscar o Pokémon.");
     return null;
   }
 }
