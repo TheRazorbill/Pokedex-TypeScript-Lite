@@ -1,12 +1,12 @@
-# Pokedex TypeScript Lite
+# Pokédex TypeScript Lite
 
 ## Sobre o projeto
 
-O Pokedex TypeScript Lite é uma aplicacao desenvolvida em Node.js com TypeScript que realiza a consulta de dados de Pokemon atraves da PokeAPI e gerencia um catalogo local durante a execucao do sistema.
+O Pokédex TypeScript Lite é uma aplicação desenvolvida em Node.js com TypeScript que realiza a consulta de dados de Pokémon através da PokeAPI e gerencia um catálogo local durante a execução do sistema.
 
 ## Objetivo
 
-O objetivo deste projeto e aplicar os conceitos fundamentais do Modulo 01, abrangendo a comunicacao assincrona, persistencia em memoria, tipagem estrita com TypeScript e organizacao arquitetural em camadas.
+O objetivo deste projeto é aplicar os conceitos fundamentais do Módulo 01, abrangendo a comunicação assíncrona, persistência em memória, tipagem estrita com TypeScript e organização arquitetural em camadas.
 
 ## Tecnologias utilizadas
 
@@ -17,9 +17,9 @@ O objetivo deste projeto e aplicar os conceitos fundamentais do Modulo 01, abran
 - Git
 - GitHub
 
-## Pre-requisitos
+## Pré-requisitos
 
-Para executar este projeto, e necessario possuir instalado:
+Para executar este projeto, é necessário possuir instalado:
 
 - Node.js
 - npm
@@ -27,85 +27,117 @@ Para executar este projeto, e necessario possuir instalado:
 
 ## Como instalar
 
-1. Clone o repositorio:
-   git clone https://github.com/TheRazorbill/Pokdex-TypeScript-Lite
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/TheRazorbill/Pok-dex-TypeScript-Lite.git
+   ```
 
 2. Acesse a pasta do projeto:
-   cd pokedex-typescript-lite
+   ```bash
+   cd Pok-dex-TypeScript-Lite
+   ```
 
-3. Instale as dependencias:
+3. Instale as dependências:
+   ```bash
    npm install
+   ```
 
 ## Como executar
 
-Para iniciar a aplicacao em ambiente de desenvolvimento:
+Para iniciar a aplicação em ambiente de desenvolvimento:
+```bash
 npm run dev
+```
 
 ## Estrutura do projeto
 
-pokedex-typescript-lite/
+```
+Pok-dex-TypeScript-Lite/
 ├── src/
-│ ├── controllers/
-│ ├── models/
-│ ├── services/
-│ ├── utils/
-│ └── main.ts
+│   ├── controllers/
+│   │   └── terminalController.ts
+│   ├── models/
+│   │   ├── customErrors.ts
+│   │   └── pokemon.ts
+│   ├── services/
+│   │   ├── boxService.ts
+│   │   └── pokeApiService.ts
+│   ├── utils/
+│   │   └── textFormatters.ts
+│   └── main.ts
+├── .gitignore
 ├── package.json
+├── package-lock.json
+├── pc_box.json
 ├── tsconfig.json
 └── README.md
+```
 
 ## Funcionalidades
 
-- Busca de Pokemon por nome ou ID via API
-- Mapeamento de dados da API para interface simplificada
-- Adicao de Pokemon ao catalogo local
-- Validacao de duplicidade por ID
-- Listagem do catalogo
-- Remocao de Pokemon do catalogo por ID
-- Tratamento de erros de requisicao
+- Busca de Pokémon por nome ou ID via API externa (PokeAPI)
+- Mapeamento e tipagem dos dados da API para uma interface simplificada
+- Adição de Pokémon ao catálogo local em memória
+- Validação de duplicidade por ID no catálogo
+- Listagem formatada do catálogo em formato de tabela no terminal
+- Remoção de Pokémon do catálogo por ID com tratamento de erros
+- Tratamento de erros personalizado para requisições da API e operações locais
 
-## Exemplos de execucao
+## Exemplos de execução
 
-### Busca valida
+### Busca de Pokémon existente e adição ao catálogo
+Saída no terminal:
+```text
+[OK] Pokémon encontrado: Pikachu
+#25 Pikachu | Tipos: electric | Altura: 4 | Peso: 60
+[OK] Pikachu adicionado ao catálogo.
+```
 
-Entrada: pikachu
-Saida:
-[OK] Pokemon encontrado: pikachu
-#25 - pikachu | Tipos: electric | Altura: 4 | Peso: 60
+### Tentativa de adição duplicada
+Saída no terminal:
+```text
+[AVISO] Pikachu já está no catálogo.
+```
 
-### Busca invalida
+### Busca de Pokémon inexistente
+Saída no terminal:
+```text
+[ERRO] Pokémon não encontrado.
+```
 
-Entrada: pokemon-inexistente
-Saida:
-[ERRO] Pokemon nao encontrado.
+### Listagem do catálogo
+Saída no terminal:
+```text
+─────────────────────────────────────────────────────
+ID     Nome         Tipos              Altura   Peso
+─────────────────────────────────────────────────────
+#25    Pikachu      electric                4     60
+#4     Charmander   fire                    6     85
+─────────────────────────────────────────────────────
+```
 
-### Duplicidade
-
-Entrada: adicionar pikachu duas vezes
-Saida:
-[AVISO] pikachu ja esta no catalogo.
-
-### Remocao
-
-Entrada: remover ID 25
-Saida:
-[OK] Pokemon removido do catalogo.
+### Remoção de Pokémon do catálogo por ID
+Saída no terminal:
+```text
+[OK] Pokémon removido do catálogo com sucesso.
+```
 
 ## Conceitos aplicados
 
-- TypeScript: Uso de interfaces e tipagem de parametros e retornos.
-- Fetch e Async/Await: Consumo da API de forma assincrona.
-- Tratamento de erros: Implementacao de blocos try/catch.
-- Metodos de array: Utilizacao de filter, some, map e forEach.
-- Programacao Orientada a Objetos: Implementacao da classe CatalogoPokemon.
+- TypeScript: Uso de interfaces, tipos personalizados e tipagem estrita de parâmetros e retornos.
+- Fetch e Async/Await: Consumo assíncrono da API externa PokeAPI.
+- Tratamento de erros: Implementação de classes de erro customizadas (APIError, LocalBoxError) e blocos try/catch para controle de fluxo robusto.
+- Métodos de manipulação de arrays: Utilização de map, filter, some e forEach para manipulação de listas.
+- Programação Orientada a Objetos (POO): Estruturação da lógica através de classes e métodos estáticos.
 
-## Organizacao do Kanban
+## Organização do Kanban
 
-Link do Kanban: nao esquecer do link 🙏
+O planejamento das atividades e o controle do fluxo de trabalho deste projeto são realizados por meio de um quadro Kanban de desenvolvimento.
+- Link do Kanban: [Quadro Kanban do Projeto](https://github.com/users/TheRazorbill/projects/3/views/1)
 
 ## Branches utilizadas
 
 - main
 - develop
-- feat/pokedex
+- feat/api-pokemon
 - docs/readme

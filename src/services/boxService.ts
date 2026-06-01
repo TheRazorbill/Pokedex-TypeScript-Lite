@@ -31,7 +31,7 @@ export class CatalogoPokemon {
       }
 
       this.pokemons = this.pokemons.filter((pokemon) => pokemon.id !== id);
-      TerminalController.exibirSucesso("Pokémon removed do catálogo com sucesso.");
+      TerminalController.exibirSucesso("Pokémon removido do catálogo com sucesso.");
       
     } catch (erro) {
       if (erro instanceof LocalBoxError) {
