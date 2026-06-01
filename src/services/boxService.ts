@@ -1,6 +1,7 @@
 import type { PokemonResumo } from "../models/pokemon.js";
 import { TerminalController } from "../controllers/terminalController.js";
 import { capitalizarTexto } from "../utils/textFormatters.js";
+import { LocalBoxError } from "../models/customErrors.js";
 
 export class CatalogoPokemon {
   private pokemons: PokemonResumo[] = [];
@@ -22,14 +23,20 @@ export class CatalogoPokemon {
   }
 
   remover(id: number): void {
-    const existe = this.pokemons.some((pokemon) => pokemon.id === id);
+    try {
+      const existe = this.pokemons.some((pokemon) => pokemon.id === id);
 
-    if (!existe) {
-      TerminalController.exibirAviso(`Nenhum Pokémon encontrado com o ID #${id}.`);
-      return;
+      if (!existe) {
+        throw new LocalBoxError(`Nenhum Pokémon encontrado com o ID #${id}.`);
+      }
+
+      this.pokemons = this.pokemons.filter((pokemon) => pokemon.id !== id);
+      TerminalController.exibirSucesso("Pokémon removed do catálogo com sucesso.");
+      
+    } catch (erro) {
+      if (erro instanceof LocalBoxError) {
+        TerminalController.exibirAviso(erro.message);
+      }
     }
-
-    this.pokemons = this.pokemons.filter((pokemon) => pokemon.id !== id);
-    TerminalController.exibirSucesso("Pokémon removido do catálogo com sucesso.");
   }
 }
