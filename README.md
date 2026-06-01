@@ -29,12 +29,12 @@ Para executar este projeto, é necessário possuir instalado:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/TheRazorbill/Pok-dex-TypeScript-Lite.git
+   git clone https://github.com/TheRazorbill/Pokedex-TypeScript-Lite.git
    ```
 
 2. Acesse a pasta do projeto:
    ```bash
-   cd Pok-dex-TypeScript-Lite
+   cd Pokedex-TypeScript-Lite
    ```
 
 3. Instale as dependências:
