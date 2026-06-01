@@ -42,11 +42,31 @@ Para executar este projeto, é necessário possuir instalado:
    npm install
    ```
 
-## Como executar
+## Como executar e scripts disponíveis
 
-Para iniciar a aplicação em ambiente de desenvolvimento:
+No projeto, os seguintes scripts estão configurados no `package.json`:
+
+### Desenvolvimento
+Para iniciar a aplicação diretamente a partir dos arquivos TypeScript (usando `tsx`):
 ```bash
 npm run dev
+```
+
+### Produção / Compilação
+1. **Compilar o projeto**: Converte os arquivos TypeScript para JavaScript na pasta `dist/` (sem gerar arquivos de definição ou mapas desnecessários):
+   ```bash
+   npm run build
+   ```
+
+2. **Iniciar o código compilado**: Executa os arquivos JavaScript compilados na pasta `dist/`:
+   ```bash
+   npm start
+   ```
+
+### Teste de Build Completo
+Para validar se a compilação ocorre sem erros e rodar o executável gerado:
+```bash
+npm test
 ```
 
 ## Estrutura do projeto
