@@ -1,4 +1,7 @@
 import type { PokemonResumo } from "../models/pokemon.js";
+import { TerminalController } from "../controllers/terminalController.js";
+import { capitalizarTexto } from "../utils/textFormatters.js";
+import { LocalBoxError } from "../models/customErrors.js";
 
 export class CatalogoPokemon {
   private pokemons: PokemonResumo[] = [];
@@ -7,60 +10,33 @@ export class CatalogoPokemon {
     const jaExiste = this.pokemons.some((item) => item.id === pokemon.id);
 
     if (jaExiste) {
-      console.log(`[AVISO] ${pokemon.name} já está no catálogo.`);
+      TerminalController.exibirAviso(`${capitalizarTexto(pokemon.name)} já está no catálogo.`);
       return;
     }
 
     this.pokemons.push(pokemon);
-    console.log(`[OK] ${pokemon.name} adicionado ao catálogo.`);
+    TerminalController.exibirSucesso(`${capitalizarTexto(pokemon.name)} adicionado ao catálogo.`);
   }
 
   listar(): void {
-    if (this.pokemons.length === 0) {
-      console.log("[AVISO] Catálogo vazio.");
-      return;
-    }
-
-    console.log("Catálogo atual:");
-    this.pokemons.forEach((pokemon) => {
-      console.log(
-        `#${pokemon.id} ${pokemon.name} | Tipos: ${pokemon.tipos.join(", ")} | Altura: ${pokemon.altura} | Peso: ${pokemon.peso}`,
-      );
-    });
+    TerminalController.renderizarCatalogo(this.pokemons);
   }
 
   remover(id: number): void {
-    const existe = this.pokemons.some((pokemon) => pokemon.id === id);
+    try {
+      const existe = this.pokemons.some((pokemon) => pokemon.id === id);
 
-    if (!existe) {
-      console.log("[AVISO] Nenhum Pokémon encontrado com esse ID.");
-      return;
+      if (!existe) {
+        throw new LocalBoxError(`Nenhum Pokémon encontrado com o ID #${id}.`);
+      }
+
+      this.pokemons = this.pokemons.filter((pokemon) => pokemon.id !== id);
+      TerminalController.exibirSucesso("Pokémon removed do catálogo com sucesso.");
+      
+    } catch (erro) {
+      if (erro instanceof LocalBoxError) {
+        TerminalController.exibirAviso(erro.message);
+      }
     }
-
-    this.pokemons = this.pokemons.filter((pokemon) => pokemon.id !== id);
-    console.log("[OK] Pokémon removido do catálogo.");
   }
 }
-
-const pokemonCatalogo = new CatalogoPokemon();
-
-pokemonCatalogo.adicionar({
-  id: 1,
-  name: "Bulbasaur",
-  tipos: ["grama", "veneno"],
-  altura: 7,
-  peso: 69,
-});
-pokemonCatalogo.adicionar({
-  id: 4,
-  name: "Charmander",
-  tipos: ["fogo"],
-  altura: 6,
-  peso: 85,
-});
-
-pokemonCatalogo.listar();
-
-pokemonCatalogo.remover(1);
-
-pokemonCatalogo.listar();
