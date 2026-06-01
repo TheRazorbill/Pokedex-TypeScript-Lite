@@ -1,6 +1,3 @@
-// criar as interfaces
-// organizar a arquitetura do arquivo
-
 import { buscarPokemon } from "./services/pokeApiService.js";
 import { CatalogoPokemon } from "./services/boxService.js";
 import { TerminalController } from "./controllers/terminalController.js";
@@ -8,7 +5,8 @@ import { TerminalController } from "./controllers/terminalController.js";
 async function main() {
   const catalogo = new CatalogoPokemon();
 
-  console.log("--- Iniciando Simulação da Pokédex TypeScript Lite --- \n");
+  console.log("\nIniciando Simulação da Pokédex TypeScript Lite");
+  console.log("─────────────────────────────────────────────────────");
 
   const pikachu = await buscarPokemon("pikachu");
   if (pikachu !== null) {

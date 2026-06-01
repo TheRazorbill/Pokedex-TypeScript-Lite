@@ -4,10 +4,14 @@ import { capitalizarTexto } from "../utils/textFormatters.js";
 export class TerminalController {
   static exibirPokemonEncontrado(pokemon: PokemonResumo): void {
     const nomeFormatado = capitalizarTexto(pokemon.name);
-    console.log(`[OK] Pokémon encontrado: ${nomeFormatado}`);
+    console.log(`\n[OK] Pokémon encontrado: ${nomeFormatado}`);
     console.log(
-      `#${pokemon.id} ${nomeFormatado} | Tipos: ${pokemon.tipos.join(", ")} | Altura: ${pokemon.altura} | Peso: ${pokemon.peso}`,
+      `#${pokemon.id} ${nomeFormatado} | Tipos: ${pokemon.tipos.join(", ")} | Altura: ${pokemon.altura} | Peso: ${pokemon.peso}`
     );
+  }
+
+  static exibirSucesso(mensagem: string): void {
+    console.log(`[OK] ${mensagem}`);
   }
 
   static exibirAviso(mensagem: string): void {
@@ -24,11 +28,31 @@ export class TerminalController {
       return;
     }
 
-    console.log("\nCatálogo atual:");
+    console.log("\n─────────────────────────────────────────────────────");
+    console.log(
+      "ID".padEnd(7) +
+      "Nome".padEnd(13) +
+      "Tipos".padEnd(17) +
+      "Altura".padStart(8) +
+      "Peso".padStart(7)
+    );
+    console.log("─────────────────────────────────────────────────────");
+
     pokemons.forEach((pokemon) => {
+      const idStr = `#${pokemon.id}`;
+      const nomeStr = capitalizarTexto(pokemon.name);
+      const tiposStr = pokemon.tipos.join(", ");
+      const alturaStr = String(pokemon.altura);
+      const pesoStr = String(pokemon.peso);
+
       console.log(
-        `#${pokemon.id} ${pokemon.name} | Tipos: ${pokemon.tipos.join(", ")} | Altura: ${pokemon.altura} | Peso: ${pokemon.peso}`,
+        idStr.padEnd(7) +
+        nomeStr.padEnd(13) +
+        tiposStr.padEnd(17) +
+        alturaStr.padStart(8) +
+        pesoStr.padStart(7)
       );
     });
+    console.log("─────────────────────────────────────────────────────\n");
   }
 }
