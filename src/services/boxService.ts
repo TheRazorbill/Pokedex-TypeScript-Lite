@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-//  # Camada de Persistência Local (node:fs/promises). Aplica métodos funcionais validados pelo TS.
-=======
 import type { PokemonResumo } from "../models/pokemon.ts";
 
 export class CatalogoPokemon {
@@ -44,4 +41,3 @@ export class CatalogoPokemon {
     console.log("[OK] Pokémon removido do catálogo.");
   }
 }
->>>>>>> Stashed changes
