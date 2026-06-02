@@ -4,7 +4,10 @@
   "description": "## Sobre o projeto O Pokedex TypeScript Lite é uma aplicacao desenvolvida em Node.js com TypeScript que realiza a consulta de dados de Pokemon atraves da PokeAPI e gerencia um catalogo local durante a execucao do sistema.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "dev": "tsx src/main.ts",
+    "test": "npm run build && node dist/main.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +24,6 @@
     "@types/node": "^25.9.1",
     "tsx": "^4.22.3",
     "typescript": "^6.0.3"
-  }
+  },
+  "type": "module"
 }
